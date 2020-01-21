@@ -17,7 +17,7 @@ type t = {
 
 let scoring: t => score =
   troll => {
-    Killed.fold((k, v, accum) => Elf.value(k) * v, troll.kills, 0);
+    Killed.fold((k, v, accum) => Elf.value(k) * v + accum, troll.kills, 0);
   };
 
 let modify_score: (option(kill) => option(kill), Elf.t, t) => t =
@@ -28,9 +28,9 @@ let modify_score: (option(kill) => option(kill), Elf.t, t) => t =
 let optional_add: (option(kill), option(kill)) => option(kill) =
   (a, b) => {
     switch (a, b) {
-    | (Some(x), None) => a
+    | (Some(x), None) => Some(x)
     | (Some(x), Some(y)) => Some(x + y)
-    | (None, Some(y)) => b
+    | (None, Some(y)) => Some(y)
     | _ => None
     };
   };
@@ -40,7 +40,7 @@ let i_got: (kill, Elf.t, t) => t =
     modify_score(optional_add(Some(num)), elf, troll);
   };
 
-let i_got_one: (Elf.t, t) => t = i_got(1);
+let i_got_one: (Elf.t, t) => t = { i_got(1) };
 
 let oops_he_survived: (Elf.t, t) => t = i_got(-1);
 

@@ -24,8 +24,7 @@ describe("Elf Invariance", ({test}) => {
            ~count=1000,
            ~name="The value of a High elf must be an even number",
            elf_high_arbitrary,
-           elf =>
-           value(elf) mod 2 === 0
+           elf => value(elf) mod 2 === 0
          )
          |> expect.ext.qCheckTest;
          ();
