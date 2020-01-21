@@ -117,8 +117,8 @@ describe("Troll Idempotence", ({test}) => {
         troll_two_elves_arbitrary,
         ((troll, elf1, elf2)) => {
           let troll_kill_1 = i_got_one(elf1, troll);
-          let troll_kill_2 = i_got_one(elf2, troll_kill_1);
-          scoring(troll_kill_1) < scoring(troll_kill_2);
+          let troll_kill_2 = i_got_one(elf2, troll);
+          Lib.Elf.value(elf1) === Lib.Elf.value(elf2) ? scoring(troll_kill_1) == scoring(troll_kill_2) : scoring(troll_kill_1) != scoring(troll_kill_2);
         }
       )
       |> expect.ext.qCheckTest;
