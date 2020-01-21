@@ -45,7 +45,6 @@ describe("Troll test suite", ({test}) => {
     let faeor = Lib.Elf.{role: Swordsman, race: DarkElf};
     let aklass = {name: "Aklass", kills: Killed.empty};
     let counter: int = i_got_one(faeor, aklass).kills |> Killed.find(faeor);
-    let counter: int = i_got_one(faeor, aklass).kills |> Killed.find(faeor);
     expect.int(counter).toBe(1);
   });
   test(
